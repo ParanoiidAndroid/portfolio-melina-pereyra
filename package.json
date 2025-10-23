@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
 
-  "homepage": "https://paranoiidandroid.github.io/portfolio-melina-pereyra/",
+  "homepage": "https://portfolio-melina-pereyra.vercel.app/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
