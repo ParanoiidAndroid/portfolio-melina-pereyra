@@ -1,27 +1,30 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const FAQ = () => {
+  const { t } = useTranslation();
   const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [
     {
-      question: "¿Cuánto se tarda en traducir un texto?",
-      answer: "El tiempo de traducción depende de varios factores como la longitud del texto, la complejidad del contenido y el tipo de traducción. Para textos estándar, calculo aproximadamente 2,000-2,500 palabras por día hábil. Para traducciones juradas o textos técnicos especializados, el tiempo puede ser mayor. Siempre te proporcionaré una fecha de entrega estimada cuando me envíes el proyecto."
+      question: t('faq.q1.question'),
+      answer: t('faq.q1.answer')
     },
     {
-      question: "Si quiero traducir un texto, ¿en qué formato tengo que mandar los archivos?",
-      answer: "Acepto archivos en múltiples formatos: Word (.docx, .doc), PDF, PowerPoint (.pptx), Excel (.xlsx), y archivos de texto plano (.txt). También trabajo con archivos de subtítulos (.srt, .vtt) y formatos de localización. Si tienes un formato específico que no mencioné, consultame y veré si puedo trabajar con él. Lo importante es que me envíes el archivo más editable posible para garantizar la mejor calidad."
+      question: t('faq.q2.question'),
+      answer: t('faq.q2.answer')
     },
     {
-      question: "¿Qué son las traducciones juradas?",
-      answer: "Las traducciones juradas son traducciones oficiales que tienen validez legal y administrativa. Están certificadas por un traductor público (como yo) y llevan mi sello, firma y número de matrícula. Estas traducciones son requeridas para documentos oficiales como títulos universitarios, certificados de nacimiento, documentos legales, contratos, etc. que necesitan ser presentados ante organismos oficiales, universidades, o para trámites migratorios."
+      question: t('faq.q3.question'),
+      answer: t('faq.q3.answer')
     },
     {
-      question: "¿Puedo ver algunas de tus traducciones?",
-      answer: "Por razones de confidencialidad y acuerdos de no divulgación con mis clientes, no puedo compartir traducciones completas de proyectos anteriores. Sin embargo, puedo proporcionarte muestras de traducción de textos públicos o crear una muestra específica del tipo de contenido que necesitas traducir. También puedo compartir testimonios de clientes satisfechos que dan fe de la calidad de mi trabajo."
+      question: t('faq.q4.question'),
+      answer: t('faq.q4.answer')
     }
   ];
 
@@ -51,7 +54,7 @@ const FAQ = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent font-playfair mb-4">
-            Preguntas Frecuentes
+            {t('faq.title')}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] mx-auto rounded-full"></div>
         </motion.div>
@@ -119,16 +122,16 @@ const FAQ = () => {
         >
           <div className="text-center">
             <h3 className="text-2xl font-bold text-[#6A5A87] font-lora mb-4">
-              ¿Tienes más preguntas?
+              {t('faq.moreQuestions')}
             </h3>
             <p className="text-lg text-[#6A5A87] font-lora mb-8">
-              No dudes en contactarme para resolver cualquier duda sobre tus proyectos de traducción
+              {t('faq.moreQuestionsText')}
             </p>
             <button 
               onClick={() => scrollToSection('hero')}
               className="bg-[#D0A2F3] hover:bg-[#9152C9] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300"
             >
-              Contáctame
+              {t('faq.contactButton')}
             </button>
           </div>
         </motion.div>

@@ -1,0 +1,131 @@
+{
+  "nav": {
+    "about": "Sobre Mí",
+    "services": "Servicios",
+    "faq": "Preguntas Frecuentes",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "subtitle": "Traductora Pública ES<>EN",
+    "description": "Conectando culturas y lenguajes con traducciones precisas, profesionales y hechas a medida para tus necesidades.",
+    "certified": "Certificada",
+    "years": "2+ Años",
+    "languages": "ES ↔ EN",
+    "global": "Global",
+    "viewPortfolio": "Ver Portfolio",
+    "contact": "Contáctame"
+  },
+  "about": {
+    "title": "Sobre Mí",
+    "description": "Soy traductora pública de inglés con una sólida formación académica y experiencia profesional. Mi pasión por los idiomas y la precisión me impulsa a ofrecer servicios de traducción de alta calidad."
+  },
+  "services": {
+    "title": "Campos & Servicios",
+    "subtitle": "Soluciones profesionales de traducción adaptadas a tus necesidades",
+    "translation": {
+      "title": "Traducción",
+      "services": ["Legal", "Técnica y científica", "Turismo y viajes"]
+    },
+    "audiovisual": {
+      "title": "Traducción Audiovisual",
+      "services": ["Subtitulado", "Transcripción", "Closed Caption"]
+    },
+    "localization": {
+      "title": "Localización",
+      "services": ["Videojuegos", "Páginas web", "Aplicaciones"]
+    },
+    "editing": {
+      "title": "Edición y Corrección",
+      "services": ["Revisión de estilo", "Corrección ortográfica", "Edición de contenido"]
+    },
+    "customService": "¿Necesitas un servicio personalizado? Contactame",
+    "contactButton": "Contactame",
+    "catTools": {
+      "title": "Herramientas CAT",
+      "subtitle": "Trabajo con las mejores herramientas de traducción asistida por computadora para garantizar calidad y eficiencia"
+    },
+    "howIWork": {
+      "title": "¿Cómo trabajo?",
+      "subtitle": "Este proceso se aplica a proyectos de traducción de textos o de páginas web, los de revisión de traducciones y corrección de textos y las transcreaciones. Los proyectos de interpretación funcionan de forma distinta.",
+      "steps": {
+        "1": {
+          "title": "Me contactas",
+          "description": "Rellenas el formulario de contacto y hablamos de tu proyecto."
+        },
+        "2": {
+          "title": "Recibo los archivos",
+          "description": "Me envías los documentos por email especificando el plazo y detalles."
+        },
+        "3": {
+          "title": "Recibís el presupuesto",
+          "description": "En menos de 24 horas te enviaré el presupuesto y fecha de entrega."
+        },
+        "4": {
+          "title": "Me pongo manos a la obra",
+          "description": "Traduzco el mensaje de un idioma a otro."
+        },
+        "5": {
+          "title": "Paso el control de calidad",
+          "description": "Hago una revisión de la traducción para asegurarme de que está correcta."
+        },
+        "6": {
+          "title": "Te entrego el proyecto",
+          "description": "Te envío el proyecto traducido con el mismo formato del original por correo."
+        }
+      }
+    }
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "q1": {
+      "question": "¿Cuánto se tarda en traducir un texto?",
+      "answer": "El tiempo de traducción depende de varios factores como la longitud del texto, la complejidad del contenido y el tipo de traducción. Para textos estándar, calculo aproximadamente 2,000-2,500 palabras por día hábil. Para traducciones juradas o textos técnicos especializados, el tiempo puede ser mayor. Siempre te proporcionaré una fecha de entrega estimada cuando me envíes el proyecto."
+    },
+    "q2": {
+      "question": "Si quiero traducir un texto, ¿en qué formato tengo que mandar los archivos?",
+      "answer": "Acepto archivos en múltiples formatos: Word (.docx, .doc), PDF, PowerPoint (.pptx), Excel (.xlsx), y archivos de texto plano (.txt). También trabajo con archivos de subtítulos (.srt, .vtt) y formatos de localización. Si tienes un formato específico que no mencioné, consultame y veré si puedo trabajar con él. Lo importante es que me envíes el archivo más editable posible para garantizar la mejor calidad."
+    },
+    "q3": {
+      "question": "¿Qué son las traducciones juradas?",
+      "answer": "Las traducciones juradas son traducciones oficiales que tienen validez legal y administrativa. Están certificadas por un traductor público (como yo) y llevan mi sello, firma y número de matrícula. Estas traducciones son requeridas para documentos oficiales como títulos universitarios, certificados de nacimiento, documentos legales, contratos, etc. que necesitan ser presentados ante organismos oficiales, universidades, o para trámites migratorios."
+    },
+    "q4": {
+      "question": "¿Puedo ver algunas de tus traducciones?",
+      "answer": "Por razones de confidencialidad y acuerdos de no divulgación con mis clientes, no puedo compartir traducciones completas de proyectos anteriores. Sin embargo, puedo proporcionarte muestras de traducción de textos públicos o crear una muestra específica del tipo de contenido que necesitas traducir. También puedo compartir testimonios de clientes satisfechos que dan fe de la calidad de mi trabajo."
+    },
+    "moreQuestions": "¿Tienes más preguntas?",
+    "moreQuestionsText": "No dudes en contactarme para resolver cualquier duda sobre tus proyectos de traducción",
+    "contactButton": "Contáctame"
+  },
+  "form": {
+    "title": "Contáctame",
+    "subtitle": "¿Tienes un proyecto de traducción? Completa el formulario y me pondré en contacto contigo lo antes posible.",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Email",
+    "emailTitle": "Título del Email",
+    "subject": "Asunto",
+    "message": "Mensaje",
+    "files": "Archivos adjuntos (opcional, máximo 5)",
+    "filesDescription": "Haz clic para seleccionar archivos o arrastra y suelta aquí",
+    "filesSupported": "Formatos soportados: PDF, Word, Excel, PowerPoint, texto, subtítulos",
+    "filesSelected": "Archivos seleccionados",
+    "submit": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "successMessage": "¡Mensaje enviado con éxito! Te contactaré pronto.",
+    "errorMessage": "Error al enviar el mensaje. Por favor, inténtalo de nuevo o contacta directamente por email.",
+    "alternativeContact": "¿Prefieres otro método de contacto?",
+    "alternativeContactText": "También puedes contactarme directamente por email o redes sociales. Te responderé en menos de 24 horas.",
+    "placeholders": {
+      "firstName": "Tu nombre",
+      "lastName": "Tu apellido",
+      "email": "tu-email@ejemplo.com",
+      "emailTitle": "Ej: Consulta sobre traducción de documentos",
+      "subject": "Breve descripción del asunto",
+      "message": "Describe tu proyecto de traducción en detalle..."
+    }
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados"
+  }
+}

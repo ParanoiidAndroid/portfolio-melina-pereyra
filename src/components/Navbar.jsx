@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -49,25 +52,27 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-6 text-lg font-semibold">
-          {[
-            { name: "Home", id: "hero" },
-            { name: "About me", id: "about" },
-            { name: "Services", id: "services" },
-            { name: "FAQs", id: "faq" },
-            { name: "Contact", id: "contact" }
-          ].map((item) => (
-            <li
-              key={item.name}
-              className="relative group cursor-pointer transition-all duration-300"
-              onClick={() => scrollToSection(item.id)}
-            >
-              <span className="px-4 py-2 rounded-full group-hover:bg-[#C08BEF] group-hover:text-white transition-all duration-300">
-                {item.name}
-              </span>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden md:flex items-center space-x-6">
+          <ul className="flex space-x-6 text-lg font-semibold">
+            {[
+              { name: t('nav.about'), id: "about" },
+              { name: t('nav.services'), id: "services" },
+              { name: t('nav.faq'), id: "faq" },
+              { name: t('nav.contact'), id: "contact" }
+            ].map((item) => (
+              <li
+                key={item.id}
+                className="relative group cursor-pointer transition-all duration-300"
+                onClick={() => scrollToSection(item.id)}
+              >
+                <span className="px-4 py-2 rounded-full group-hover:bg-[#C08BEF] group-hover:text-white transition-all duration-300">
+                  {item.name}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <LanguageSelector />
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -83,14 +88,13 @@ const Navbar = () => {
         <div className="md:hidden bg-[#D0A2F3] text-white shadow-md">
           <ul className="flex flex-col text-center space-y-4 py-4 text-lg font-semibold">
             {[
-              { name: "Home", id: "hero" },
-              { name: "About me", id: "about" },
-              { name: "Services", id: "services" },
-              { name: "FAQs", id: "faq" },
-              { name: "Contact", id: "contact" }
+              { name: t('nav.about'), id: "about" },
+              { name: t('nav.services'), id: "services" },
+              { name: t('nav.faq'), id: "faq" },
+              { name: t('nav.contact'), id: "contact" }
             ].map((item) => (
               <li
-                key={item.name}
+                key={item.id}
                 className="relative group cursor-pointer transition-all duration-300"
                 onClick={() => scrollToSection(item.id)}
               >
@@ -100,6 +104,9 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+          <div className="flex justify-center py-4">
+            <LanguageSelector />
+          </div>
         </div>
       )}
     </nav>

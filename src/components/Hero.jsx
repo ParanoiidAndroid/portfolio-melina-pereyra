@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Mail, Star, CheckCircle, Languages, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
+  const { t } = useTranslation();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -93,7 +95,7 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.3 }}
           className="text-xl md:text-2xl font-medium text-[#6A5A87] font-lora"
         >
-          Traductora Pública ES&lt;&gt;EN
+          {t('hero.subtitle')}
         </motion.h2>
 
         {/* Descripción */}
@@ -103,7 +105,7 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.6 }}
           className="text-base md:text-lg text-[#6A5A87] leading-relaxed font-lora max-w-2xl"
         >
-          Conectando culturas y lenguajes con traducciones precisas, profesionales y hechas a medida para tus necesidades.
+          {t('hero.description')}
         </motion.p>
 
         {/* Elementos de confianza */}
@@ -115,19 +117,19 @@ const Hero = () => {
         >
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-[#9152C9]" />
-            <span className="font-medium">Certificada</span>
+            <span className="font-medium">{t('hero.certified')}</span>
           </div>
           <div className="flex items-center gap-2">
             <Star className="w-4 h-4 text-[#9152C9]" />
-            <span className="font-medium">2+ Años</span>
+            <span className="font-medium">{t('hero.years')}</span>
           </div>
           <div className="flex items-center gap-2">
             <Languages className="w-4 h-4 text-[#9152C9]" />
-            <span className="font-medium">ES ↔ EN</span>
+            <span className="font-medium">{t('hero.languages')}</span>
           </div>
           <div className="flex items-center gap-2">
             <Globe className="w-4 h-4 text-[#9152C9]" />
-            <span className="font-medium">Global</span>
+            <span className="font-medium">{t('hero.global')}</span>
           </div>
         </motion.div>
 
@@ -147,7 +149,7 @@ const Hero = () => {
               size="lg"
               className="bg-[#D0A2F3] hover:bg-[#9152C9] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300"
             >
-              Ver Portfolio
+              {t('hero.viewPortfolio')}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </motion.div>
@@ -163,7 +165,7 @@ const Hero = () => {
               className="bg-white hover:bg-[#EFEAEF] text-[#9152C9] hover:text-[#9152C9] border-2 border-[#D0A2F3] hover:border-[#9152C9] font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300"
             >
               <Mail className="mr-2 h-4 w-4" />
-              Contáctame
+              {t('hero.contact')}
             </Button>
           </motion.div>
         </motion.div>

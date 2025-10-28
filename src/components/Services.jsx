@@ -3,36 +3,39 @@ import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FileText, Video, Globe, PenTool, Mail, Phone, File, DollarSign, Languages, Search, Send } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Services = () => {
+  const { t } = useTranslation();
+  
   const services = [
     {
       id: 1,
-      title: "Traducción",
+      title: t('services.translation.title'),
       image: "/assets/traduccion.webp",
       icon: FileText,
-      services: ["Legal", "Técnica y científica", "Turismo y viajes"]
+      services: t('services.translation.services', { returnObjects: true })
     },
     {
       id: 2,
-      title: "Traducción Audiovisual",
+      title: t('services.audiovisual.title'),
       image: "/assets/traduccion-audiovisual.png",
       icon: Video,
-      services: ["Subtitulado", "Transcripción", "Closed Caption"]
+      services: t('services.audiovisual.services', { returnObjects: true })
     },
     {
       id: 3,
-      title: "Localización",
+      title: t('services.localization.title'),
       image: "/assets/localizacion.png",
       icon: Globe,
-      services: ["Videojuegos", "Páginas web", "Aplicaciones"]
+      services: t('services.localization.services', { returnObjects: true })
     },
     {
       id: 4,
-      title: "Edición y Corrección",
+      title: t('services.editing.title'),
       image: "/assets/edicion-y-correccion.png",
       icon: PenTool,
-      services: ["Revisión de estilo", "Corrección ortográfica", "Edición de contenido"]
+      services: t('services.editing.services', { returnObjects: true })
     }
   ];
 
@@ -48,10 +51,10 @@ const Services = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-tight font-playfair mb-4">
-            Campos & Servicios
+            {t('services.title')}
           </h2>
           <p className="text-lg md:text-xl text-[#6A5A87] font-lora max-w-3xl mx-auto">
-            Soluciones profesionales de traducción adaptadas a tus necesidades
+            {t('services.subtitle')}
           </p>
         </motion.div>
 
@@ -118,7 +121,7 @@ const Services = () => {
           className="text-center"
         >
           <p className="text-lg md:text-xl text-[#6A5A87] font-lora mb-6">
-            ¿Necesitas un servicio personalizado? Contactame
+            {t('services.customService')}
           </p>
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -129,7 +132,7 @@ const Services = () => {
               className="bg-[#D0A2F3] hover:bg-[#9152C9] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300"
             >
               <Mail className="mr-2 h-4 w-4" />
-              Contactame
+              {t('services.contactButton')}
             </Button>
           </motion.div>
         </motion.div>
@@ -144,10 +147,10 @@ const Services = () => {
         >
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-tight font-playfair mb-4">
-              Herramientas CAT
+              {t('services.catTools.title')}
             </h2>
             <p className="text-lg text-[#6A5A87] font-lora max-w-3xl mx-auto">
-              Trabajo con las mejores herramientas de traducción asistida por computadora para garantizar calidad y eficiencia
+              {t('services.catTools.subtitle')}
             </p>
           </div>
 
@@ -203,11 +206,9 @@ const Services = () => {
         >
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-tight font-playfair mb-6">
-              ¿Cómo trabajo?
+              {t('services.howIWork.title')}
             </h2>
-            <p className="text-lg text-[#6A5A87] font-lora max-w-4xl mx-auto">
-              Este proceso se aplica a proyectos de traducción de textos o de páginas web, los de <strong>revisión de traducciones</strong> y <strong>corrección de textos</strong> y las <strong>transcreaciones</strong>. Los proyectos de <strong>interpretación</strong> funcionan de forma distinta.
-            </p>
+            <p className="text-lg text-[#6A5A87] font-lora max-w-4xl mx-auto" dangerouslySetInnerHTML={{ __html: t('services.howIWork.subtitle') }} />
           </div>
 
           {/* Process Steps */}
@@ -215,43 +216,43 @@ const Services = () => {
             {[
               {
                 step: 1,
-                title: "Me contactas",
-                description: "Rellenas el formulario de contacto y hablamos de tu proyecto.",
+                title: t('services.howIWork.steps.1.title'),
+                description: t('services.howIWork.steps.1.description'),
                 icon: Phone,
                 color: "bg-[#FFB3BA]"
               },
               {
                 step: 2,
-                title: "Recibo los archivos",
-                description: "Me envías los documentos por email especificando el plazo y detalles.",
+                title: t('services.howIWork.steps.2.title'),
+                description: t('services.howIWork.steps.2.description'),
                 icon: File,
                 color: "bg-[#B3D9FF]"
               },
               {
                 step: 3,
-                title: "Recibís el presupuesto",
-                description: "En menos de 24 horas te enviaré el presupuesto y fecha de entrega.",
+                title: t('services.howIWork.steps.3.title'),
+                description: t('services.howIWork.steps.3.description'),
                 icon: DollarSign,
                 color: "bg-[#FFD9B3]"
               },
               {
                 step: 4,
-                title: "Me pongo manos a la obra",
-                description: "Traduzco el mensaje de un idioma a otro.",
+                title: t('services.howIWork.steps.4.title'),
+                description: t('services.howIWork.steps.4.description'),
                 icon: Languages,
                 color: "bg-[#B3FFB3]"
               },
               {
                 step: 5,
-                title: "Paso el control de calidad",
-                description: "Hago una revisión de la traducción para asegurarme de que está correcta.",
+                title: t('services.howIWork.steps.5.title'),
+                description: t('services.howIWork.steps.5.description'),
                 icon: Search,
                 color: "bg-[#FFB3BA]"
               },
               {
                 step: 6,
-                title: "Te entrego el proyecto",
-                description: "Te envío el proyecto traducido con el mismo formato del original por correo.",
+                title: t('services.howIWork.steps.6.title'),
+                description: t('services.howIWork.steps.6.description'),
                 icon: Send,
                 color: "bg-[#B3D9FF]"
               }

@@ -1,0 +1,131 @@
+{
+  "nav": {
+    "about": "About Me",
+    "services": "Services",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "hero": {
+    "subtitle": "Certified Public Translator ES<>EN",
+    "description": "Connecting cultures and languages with accurate, professional translations tailored to your needs.",
+    "certified": "Certified",
+    "years": "2+ Years",
+    "languages": "ES ↔ EN",
+    "global": "Global",
+    "viewPortfolio": "View Portfolio",
+    "contact": "Contact Me"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "I am a certified public translator with solid academic training and professional experience. My passion for languages and precision drives me to offer high-quality translation services."
+  },
+  "services": {
+    "title": "Fields & Services",
+    "subtitle": "Professional translation solutions tailored to your needs",
+    "translation": {
+      "title": "Translation",
+      "services": ["Legal", "Technical and scientific", "Tourism and travel"]
+    },
+    "audiovisual": {
+      "title": "Audiovisual Translation",
+      "services": ["Subtitling", "Transcription", "Closed Caption"]
+    },
+    "localization": {
+      "title": "Localization",
+      "services": ["Video games", "Websites", "Applications"]
+    },
+    "editing": {
+      "title": "Editing and Proofreading",
+      "services": ["Style review", "Spelling correction", "Content editing"]
+    },
+    "customService": "Need a custom service? Contact me",
+    "contactButton": "Contact Me",
+    "catTools": {
+      "title": "CAT Tools",
+      "subtitle": "I work with the best computer-assisted translation tools to ensure quality and efficiency"
+    },
+    "howIWork": {
+      "title": "How do I work?",
+      "subtitle": "This process applies to text translation projects or websites, translation reviews and proofreading, and transcreations. Interpretation projects work differently.",
+      "steps": {
+        "1": {
+          "title": "You contact me",
+          "description": "Fill out the contact form and we'll talk about your project."
+        },
+        "2": {
+          "title": "I receive the files",
+          "description": "You send me the documents by email specifying the deadline and details."
+        },
+        "3": {
+          "title": "You receive the quote",
+          "description": "Within 24 hours I will send you the quote and delivery date."
+        },
+        "4": {
+          "title": "I get to work",
+          "description": "I translate the message from one language to another."
+        },
+        "5": {
+          "title": "I do quality control",
+          "description": "I review the translation to make sure it's correct."
+        },
+        "6": {
+          "title": "I deliver the project",
+          "description": "I send you the translated project in the same format as the original by email."
+        }
+      }
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "q1": {
+      "question": "How long does it take to translate a text?",
+      "answer": "Translation time depends on several factors such as text length, content complexity, and translation type. For standard texts, I estimate approximately 2,000-2,500 words per business day. For sworn translations or specialized technical texts, the time may be longer. I will always provide you with an estimated delivery date when you send me the project."
+    },
+    "q2": {
+      "question": "What file format should I send for translation?",
+      "answer": "I accept files in multiple formats: Word (.docx, .doc), PDF, PowerPoint (.pptx), Excel (.xlsx), and plain text files (.txt). I also work with subtitle files (.srt, .vtt) and localization formats. If you have a specific format I didn't mention, consult me and I'll see if I can work with it. The important thing is that you send me the most editable file possible to ensure the best quality."
+    },
+    "q3": {
+      "question": "What are sworn translations?",
+      "answer": "Sworn translations are official translations that have legal and administrative validity. They are certified by a public translator (like me) and bear my seal, signature, and registration number. These translations are required for official documents such as university degrees, birth certificates, legal documents, contracts, etc. that need to be presented to official agencies, universities, or for immigration procedures."
+    },
+    "q4": {
+      "question": "Can I see some of your translations?",
+      "answer": "For confidentiality reasons and non-disclosure agreements with my clients, I cannot share complete translations of previous projects. However, I can provide you with translation samples of public texts or create a specific sample of the type of content you need translated. I can also share testimonials from satisfied clients who attest to the quality of my work."
+    },
+    "moreQuestions": "Have more questions?",
+    "moreQuestionsText": "Don't hesitate to contact me to resolve any doubts about your translation projects",
+    "contactButton": "Contact Me"
+  },
+  "form": {
+    "title": "Contact Me",
+    "subtitle": "Have a translation project? Fill out the form and I'll get in touch with you as soon as possible.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "emailTitle": "Email Title",
+    "subject": "Subject",
+    "message": "Message",
+    "files": "Attachments (optional, maximum 5)",
+    "filesDescription": "Click to select files or drag and drop here",
+    "filesSupported": "Supported formats: PDF, Word, Excel, PowerPoint, text, subtitles",
+    "filesSelected": "Selected files",
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "successMessage": "Message sent successfully! I'll contact you soon.",
+    "errorMessage": "Error sending message. Please try again or contact directly by email.",
+    "alternativeContact": "Prefer another contact method?",
+    "alternativeContactText": "You can also contact me directly by email or social media. I'll respond within 24 hours.",
+    "placeholders": {
+      "firstName": "Your first name",
+      "lastName": "Your last name",
+      "email": "your-email@example.com",
+      "emailTitle": "E.g: Document translation inquiry",
+      "subject": "Brief description of the subject",
+      "message": "Describe your translation project in detail..."
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  }
+}

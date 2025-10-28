@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: portfolio-backend
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_PORT
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: EMAIL_TO
+        value: melina.lujan.pereyra@gmail.com
+      - key: FRONTEND_URL
+        value: https://portfolio-melina-pereyra.vercel.app
+
