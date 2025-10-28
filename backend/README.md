@@ -30,7 +30,7 @@ EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_USER=tu-email@gmail.com
 EMAIL_PASS=tu-password-de-aplicacion
-EMAIL_TO=melina.lujan.pereyra@gmail.com
+EMAIL_TO=email-cliente@gmail.com
 
 # Configuración de CORS
 FRONTEND_URL=http://localhost:5173
