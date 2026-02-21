@@ -18,6 +18,16 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <section 
       id="hero"
@@ -124,7 +134,7 @@ const Hero = () => {
             <span className="font-medium">{t('hero.years')}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Languages className="w-4 h-4 text-[#9152C9]" />
+            <CheckCircle className="w-4 h-4 text-[#9152C9]" />
             <span className="font-medium">{t('hero.languages')}</span>
           </div>
           <div className="flex items-center gap-2">
@@ -148,6 +158,7 @@ const Hero = () => {
             <Button 
               size="lg"
               className="bg-[#D0A2F3] hover:bg-[#9152C9] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300"
+              onClick={() => scrollToSection('about')}
             >
               {t('hero.viewPortfolio')}
               <ArrowRight className="ml-2 h-4 w-4" />
@@ -163,6 +174,7 @@ const Hero = () => {
               variant="outline"
               size="lg"
               className="bg-white hover:bg-[#EFEAEF] text-[#9152C9] hover:text-[#9152C9] border-2 border-[#D0A2F3] hover:border-[#9152C9] font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300"
+              onClick={() => scrollToSection('contact')}
             >
               <Mail className="mr-2 h-4 w-4" />
               {t('hero.contact')}

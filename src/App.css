@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
-/* Importar la fuente de Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 /* Aplicar la fuente personalizada */
 .font-poppins {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 /* Efecto adicional para el Navbar en scroll */
