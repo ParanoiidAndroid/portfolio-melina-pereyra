@@ -119,7 +119,6 @@ app.post('/api/send-email', emailRateLimiter, upload.array('files', 5), async (r
     }
 
     // 2. Verificación de Velocidad de Envío (Si es demasiado rápido, probablemente es un bot)
-    // Usuarios humanos suelen tardar al menos 3-5 segundos en enviar un formulario.
     if (submission_speed && parseInt(submission_speed) < 2000) {
       console.warn(`🤖 Bot detectado via velocidad (${submission_speed}ms)`);
       return res.status(400).json({
@@ -190,7 +189,7 @@ app.post('/api/send-email', emailRateLimiter, upload.array('files', 5), async (r
     console.log('📧 Enviando email con Resend...');
 
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>', // Debes verificar un dominio en producción
+      from: 'Portfolio Contact <onboarding@resend.dev>', 
       to: [emailTo],
       replyTo: email,
       subject: `[Portfolio] ${titulo} - ${nombre} ${apellido}`,

@@ -41,13 +41,13 @@ const Navbar = () => {
         scrolled ? "navbar-scrolled" : "bg-[#DEC2F4]"
       } text-white shadow-md font-poppins fixed w-full z-50`}
     >
-      <div className="container mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 py-4 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center md:justify-start justify-center w-full md:w-auto">
           <img
             src="/assets/logo1-mp.png"
             alt="Logo"
-            className="h-16 w-auto max-w-full scale-280"
+            className="h-12 md:h-16 w-auto max-w-full scale-150 md:scale-280 transition-transform duration-300"
           />
         </div>
 

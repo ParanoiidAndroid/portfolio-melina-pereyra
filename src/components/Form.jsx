@@ -20,7 +20,7 @@ const Form = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mountTime] = useState(Date.now());
   const [honeypot, setHoneypot] = useState('');
-  const [modalStatus, setModalStatus] = useState({ isOpen: false, type: 'success' });
+  const [modalStatus, setModalStatus] = useState({ isOpen: false, type: 'success', message: '' });
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
 
@@ -125,7 +125,7 @@ const Form = () => {
       const result = await response.json();
       
       if (result.success) {
-        setModalStatus({ isOpen: true, type: 'success' });
+        setModalStatus({ isOpen: true, type: 'success', message: t('form.successMessage') });
         // Resetear formulario
         setFormData({
           nombre: '',
@@ -142,7 +142,11 @@ const Form = () => {
       
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
-      setModalStatus({ isOpen: true, type: 'error' });
+      setModalStatus({ 
+        isOpen: true, 
+        type: 'error', 
+        message: error.message || t('form.errorMessage') 
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -159,7 +163,7 @@ const Form = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent font-playfair mb-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent font-playfair mb-4 leading-normal py-2">
             {t('form.title')}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] mx-auto rounded-full mb-6"></div>
@@ -446,7 +450,7 @@ const Form = () => {
                     disabled={isSubmitting}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] hover:from-[#C08BEF] hover:to-[#9152C9] text-white font-semibold py-4 px-8 rounded-lg shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-lora"
+                    className="w-full bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] hover:from-[#C08BEF] hover:to-[#9152C9] text-white font-semibold py-4 px-8 rounded-lg shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-lora cursor-pointer"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center justify-center">
@@ -491,7 +495,7 @@ const Form = () => {
               </h3>
               
               <p className="text-[#6A5A87] font-lora mb-8">
-                {modalStatus.type === 'success' ? t('form.successMessage') : t('form.errorMessage')}
+                {modalStatus.message}
               </p>
               
               <button

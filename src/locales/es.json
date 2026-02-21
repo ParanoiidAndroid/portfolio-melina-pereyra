@@ -142,7 +142,19 @@
     }
   },
   "footer": {
+    "name": "Melina Pereyra",
+    "profession": "Traductora Pública ES↔EN",
+    "description": "Conectando culturas y lenguajes con traducciones precisas, profesionales y hechas a medida para tus necesidades.",
+    "quickLinks": "Enlaces Rápidos",
+    "contact": "Contacto",
+    "location": "Buenos Aires, Argentina",
     "rights": "Todos los derechos reservados",
-    "developedBy": "Desarrollado por:"
+    "developedBy": "Desarrollado por:",
+    "nav": {
+      "home": "Inicio",
+      "about": "Sobre Mí",
+      "services": "Servicios",
+      "faq": "FAQs"
+    }
   }
 }

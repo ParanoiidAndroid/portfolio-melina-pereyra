@@ -50,7 +50,7 @@ const Services = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-tight font-playfair mb-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-normal font-playfair mb-4 py-2">
             {t('services.title')}
           </h2>
           <p className="text-lg md:text-xl text-[#6A5A87] font-lora max-w-3xl mx-auto">
@@ -129,7 +129,11 @@ const Services = () => {
           >
             <Button 
               size="lg"
-              className="bg-[#D0A2F3] hover:bg-[#9152C9] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300"
+              onClick={() => {
+                const element = document.getElementById('contact');
+                if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="bg-[#D0A2F3] hover:bg-[#9152C9] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300 cursor-pointer"
             >
               <Mail className="mr-2 h-4 w-4" />
               {t('services.contactButton')}
@@ -146,7 +150,7 @@ const Services = () => {
           className="mt-20 py-10"
         >
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-tight font-playfair mb-6">
+            <h2 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-normal font-playfair mb-6 py-2">
               {t('services.catTools.title')}
             </h2>
             <p className="text-lg text-[#6A5A87] font-lora max-w-3xl mx-auto leading-relaxed">
@@ -207,7 +211,7 @@ const Services = () => {
           className="mt-20"
         >
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-tight font-playfair mb-6">
+            <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-normal font-playfair mb-6 py-2">
               {t('services.howIWork.title')}
             </h2>
             <p className="text-lg text-[#6A5A87] font-lora max-w-4xl mx-auto" dangerouslySetInnerHTML={{ __html: t('services.howIWork.subtitle') }} />

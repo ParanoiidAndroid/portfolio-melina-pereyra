@@ -53,7 +53,7 @@ const FAQ = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent font-playfair mb-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent font-playfair mb-4 leading-normal py-2">
             {t('faq.title')}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] mx-auto rounded-full"></div>
@@ -128,8 +128,8 @@ const FAQ = () => {
               {t('faq.moreQuestionsText')}
             </p>
             <button 
-              onClick={() => scrollToSection('hero')}
-              className="bg-[#D0A2F3] hover:bg-[#9152C9] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300"
+              onClick={() => scrollToSection('contact')}
+              className="bg-[#D0A2F3] hover:bg-[#9152C9] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300 cursor-pointer"
             >
               {t('faq.contactButton')}
             </button>

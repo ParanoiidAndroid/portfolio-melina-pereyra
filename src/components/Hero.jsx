@@ -93,7 +93,7 @@ const Hero = () => {
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1 }}
-          className="text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-tight font-playfair"
+          className="text-5xl md:text-7xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-normal font-playfair py-2"
         >
           Melina <br /> Pereyra
         </motion.h1>

@@ -45,19 +45,19 @@ const Footer = () => {
                   className="h-16 w-auto"
                 />
                 <div>
-                  <h3 className="text-2xl font-bold font-playfair">Melina Pereyra</h3>
-                  <p className="text-sm opacity-90 font-lora">Traductora Pública ES↔EN</p>
+                  <h3 className="text-2xl font-bold font-playfair">{t('footer.name')}</h3>
+                  <p className="text-sm opacity-90 font-lora">{t('footer.profession')}</p>
                 </div>
               </motion.div>
               
-              <motion.p
+               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
                 className="text-base leading-relaxed opacity-90 font-lora max-w-md"
               >
-                Conectando culturas y lenguajes con traducciones precisas, profesionales y hechas a medida para tus necesidades.
+                {t('footer.description')}
               </motion.p>
 
               {/* Redes Sociales */}
@@ -100,18 +100,18 @@ const Footer = () => {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <h4 className="text-lg font-semibold font-playfair">Enlaces Rápidos</h4>
+              <h4 className="text-lg font-semibold font-playfair">{t('footer.quickLinks')}</h4>
               <ul className="space-y-3">
                 {[
-                  { name: "Inicio", id: "hero" },
-                  { name: "Sobre Mí", id: "about" },
-                  { name: "Servicios", id: "services" },
-                  { name: "FAQs", id: "faq" }
+                  { name: t('footer.nav.home'), id: "hero" },
+                  { name: t('footer.nav.about'), id: "about" },
+                  { name: t('footer.nav.services'), id: "services" },
+                  { name: t('footer.nav.faq'), id: "faq" }
                 ].map((link) => (
                   <li key={link.name}>
                     <button
                       onClick={() => scrollToSection(link.id)}
-                      className="text-sm opacity-90 hover:opacity-100 hover:text-white transition-all duration-300 font-lora hover:translate-x-1 transform"
+                      className="text-sm opacity-90 hover:opacity-100 hover:text-white transition-all duration-300 font-lora hover:translate-x-1 transform cursor-pointer"
                     >
                       {link.name}
                     </button>
@@ -128,13 +128,13 @@ const Footer = () => {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <h4 className="text-lg font-semibold font-playfair">Contacto</h4>
+              <h4 className="text-lg font-semibold font-playfair">{t('footer.contact')}</h4>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3 text-sm opacity-90">
                   <Mail className="w-4 h-4 flex-shrink-0" />
                   <a 
                     href="mailto:melina.lujan.pereyra@gmail.com"
-                    className="hover:text-white transition-colors duration-300 font-lora"
+                    className="hover:text-white transition-colors duration-300 font-lora cursor-pointer"
                   >
                     melina.lujan.pereyra@gmail.com
                   </a>
@@ -142,7 +142,7 @@ const Footer = () => {
                 
                 <div className="flex items-start space-x-3 text-sm opacity-90">
                   <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                  <span className="font-lora">Buenos Aires, Argentina</span>
+                  <span className="font-lora">{t('footer.location')}</span>
                 </div>
               </div>
             </motion.div>
@@ -176,7 +176,7 @@ const Footer = () => {
                     href="https://github.com/ParanoiidAndroid"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white transition-colors duration-300"
+                    className="hover:text-white transition-colors duration-300 cursor-pointer"
                     aria-label="GitHub Developer"
                   >
                     <Github className="w-5 h-5" />
@@ -185,7 +185,7 @@ const Footer = () => {
                     href="https://www.linkedin.com/in/martinfdez-dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white transition-colors duration-300"
+                    className="hover:text-white transition-colors duration-300 cursor-pointer"
                     aria-label="LinkedIn Developer"
                   >
                     <Linkedin className="w-5 h-5" />
