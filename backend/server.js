@@ -7,6 +7,8 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import process from 'process';
 
+import rateLimit from 'express-rate-limit';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -15,6 +17,18 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Configurar Rate Limit para el envío de correos
+const emailRateLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hora
+  max: 5, // Limitar cada IP a 5 peticiones por ventana
+  message: {
+    success: false,
+    message: 'Demasiadas solicitudes de contacto. Por favor, intenta de nuevo en una hora.'
+  },
+  standardHeaders: true, // Retornar info de rate limit en los headers `RateLimit-*`
+  legacyHeaders: false, // Desactivar los headers `X-RateLimit-*`
+});
 
 // Configurar Resend
 if (!process.env.RESEND_API_KEY) {
@@ -89,11 +103,30 @@ app.get('/', (req, res) => {
   });
 });
 
-// Ruta para enviar emails
-app.post('/api/send-email', upload.array('files', 5), async (req, res) => {
+// Ruta para enviar emails con protección contra bots y rate limit
+app.post('/api/send-email', emailRateLimiter, upload.array('files', 5), async (req, res) => {
   try {
-    const { nombre, apellido, email, titulo, asunto, cuerpo } = req.body;
+    const { nombre, apellido, email, titulo, asunto, cuerpo, hp_field, submission_speed } = req.body;
     const files = req.files || [];
+
+    // 1. Verificación de Honeypot (Si el campo oculto está lleno, es un bot)
+    if (hp_field) {
+      console.warn('🤖 Bot detectado via Honeypot');
+      return res.status(400).json({
+        success: false,
+        message: 'Acceso denegado'
+      });
+    }
+
+    // 2. Verificación de Velocidad de Envío (Si es demasiado rápido, probablemente es un bot)
+    // Usuarios humanos suelen tardar al menos 3-5 segundos en enviar un formulario.
+    if (submission_speed && parseInt(submission_speed) < 2000) {
+      console.warn(`🤖 Bot detectado via velocidad (${submission_speed}ms)`);
+      return res.status(400).json({
+        success: false,
+        message: 'Has enviado el formulario demasiado rápido. Intenta de nuevo.'
+      });
+    }
 
     // Validar datos requeridos
     if (!nombre || !apellido || !email || !titulo || !asunto || !cuerpo) {

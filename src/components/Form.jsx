@@ -18,6 +18,8 @@ const Form = () => {
   });
   const [files, setFiles] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [mountTime] = useState(Date.now());
+  const [honeypot, setHoneypot] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,6 +54,10 @@ const Form = () => {
       formDataToSend.append('titulo', formData.titulo);
       formDataToSend.append('asunto', formData.asunto);
       formDataToSend.append('cuerpo', formData.cuerpo);
+      
+      // Agregar datos de seguridad
+      formDataToSend.append('hp_field', honeypot);
+      formDataToSend.append('submission_speed', Date.now() - mountTime);
       
       // Agregar archivos
       files.forEach((file) => {
@@ -120,6 +126,18 @@ const Form = () => {
           <Card className="bg-white border-[#D0A2F3]/20 shadow-xl">
             <CardContent className="p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Campo Honeypot - Invisible para humanos */}
+                <div style={{ display: 'none' }} aria-hidden="true">
+                  <input
+                    type="text"
+                    name="confirm_email_security"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex="-1"
+                    autocomplete="off"
+                  />
+                </div>
+
                 {/* Información personal */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
