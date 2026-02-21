@@ -119,8 +119,11 @@
     "filesSelected": "Archivos seleccionados",
     "submit": "Enviar Mensaje",
     "sending": "Enviando...",
+    "successTitle": "¡Mensaje Enviado!",
+    "errorTitle": "Error al Enviar",
     "successMessage": "¡Mensaje enviado con éxito! Te contactaré pronto.",
     "errorMessage": "Error al enviar el mensaje. Por favor, inténtalo de nuevo o contacta directamente por email.",
+    "close": "Cerrar",
     "alternativeContact": "¿Prefieres otro método de contacto?",
     "alternativeContactText": "También puedes contactarme directamente por email o redes sociales. Te responderé en menos de 24 horas.",
     "placeholders": {
@@ -130,6 +133,12 @@
       "emailTitle": "Ej: Consulta sobre traducción de documentos",
       "subject": "Breve descripción del asunto",
       "message": "Describe tu proyecto de traducción en detalle..."
+    },
+    "validation": {
+      "required": "Este campo es obligatorio",
+      "invalidEmail": "Por favor, ingresa un email válido",
+      "noNumbers": "Este campo no puede contener números",
+      "tooShort": "El mensaje es demasiado corto"
     }
   },
   "footer": {

@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Paperclip, X, Mail, User, FileText } from 'lucide-react';
+import { Paperclip, X, Mail, User, FileText, CheckCircle } from 'lucide-react';
 import { API_ENDPOINTS } from '@/config/api';
 
 const Form = () => {
@@ -20,12 +20,46 @@ const Form = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mountTime] = useState(Date.now());
   const [honeypot, setHoneypot] = useState('');
+  const [modalStatus, setModalStatus] = useState({ isOpen: false, type: 'success' });
+  const [touched, setTouched] = useState({});
+  const [errors, setErrors] = useState({});
+
+  const validateField = (name, value) => {
+    let error = '';
+    if (!value || value.trim() === '') {
+      error = t('form.validation.required');
+    } else if ((name === 'nombre' || name === 'apellido') && /[0-9]/.test(value)) {
+      error = t('form.validation.noNumbers');
+    } else if (name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      error = t('form.validation.invalidEmail');
+    } else if (name === 'cuerpo' && value.length < 10) {
+      error = t('form.validation.tooShort');
+    }
+    return error;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+    
+    // Validar en tiempo real si ya fue tocado
+    if (touched[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: validateField(name, value)
+      }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    setErrors(prev => ({
+      ...prev,
+      [name]: validateField(name, value)
     }));
   };
 
@@ -41,6 +75,24 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validar todos los campos antes de enviar
+    const newErrors = {};
+    let hasErrors = false;
+    Object.keys(formData).forEach(key => {
+      const error = validateField(key, formData[key]);
+      if (error) {
+        newErrors[key] = error;
+        hasErrors = true;
+      }
+    });
+
+    if (hasErrors) {
+      setErrors(newErrors);
+      setTouched(Object.keys(formData).reduce((acc, key) => ({ ...acc, [key]: true }), {}));
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
@@ -73,7 +125,7 @@ const Form = () => {
       const result = await response.json();
       
       if (result.success) {
-        alert(t('form.successMessage'));
+        setModalStatus({ isOpen: true, type: 'success' });
         // Resetear formulario
         setFormData({
           nombre: '',
@@ -90,7 +142,7 @@ const Form = () => {
       
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
-      alert(t('form.errorMessage'));
+      setModalStatus({ isOpen: true, type: 'error' });
     } finally {
       setIsSubmitting(false);
     }
@@ -151,10 +203,25 @@ const Form = () => {
                       name="nombre"
                       value={formData.nombre}
                       onChange={handleInputChange}
+                      onBlur={handleBlur}
                       required
-                      className="w-full px-4 py-3 border border-[#D0A2F3]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora"
+                      className={`w-full px-4 py-3 border ${
+                        errors.nombre && touched.nombre ? 'border-red-400' : 'border-[#D0A2F3]/30'
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
                       placeholder={t('form.placeholders.firstName')}
                     />
+                    <AnimatePresence>
+                      {errors.nombre && touched.nombre && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="text-red-500 text-xs mt-1 ml-1 font-lora font-medium"
+                        >
+                          {errors.nombre}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
                   
                   <div>
@@ -168,10 +235,25 @@ const Form = () => {
                       name="apellido"
                       value={formData.apellido}
                       onChange={handleInputChange}
+                      onBlur={handleBlur}
                       required
-                      className="w-full px-4 py-3 border border-[#D0A2F3]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora"
+                      className={`w-full px-4 py-3 border ${
+                        errors.apellido && touched.apellido ? 'border-red-400' : 'border-[#D0A2F3]/30'
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
                       placeholder={t('form.placeholders.lastName')}
                     />
+                    <AnimatePresence>
+                      {errors.apellido && touched.apellido && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="text-red-500 text-xs mt-1 ml-1 font-lora font-medium"
+                        >
+                          {errors.apellido}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
 
@@ -187,10 +269,25 @@ const Form = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
+                    onBlur={handleBlur}
                     required
-                    className="w-full px-4 py-3 border border-[#D0A2F3]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora"
+                    className={`w-full px-4 py-3 border ${
+                      errors.email && touched.email ? 'border-red-400' : 'border-[#D0A2F3]/30'
+                    } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
                     placeholder={t('form.placeholders.email')}
                   />
+                  <AnimatePresence>
+                    {errors.email && touched.email && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="text-red-500 text-xs mt-1 ml-1 font-lora font-medium"
+                      >
+                        {errors.email}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 {/* Contenido del mensaje */}
@@ -206,10 +303,25 @@ const Form = () => {
                       name="titulo"
                       value={formData.titulo}
                       onChange={handleInputChange}
+                      onBlur={handleBlur}
                       required
-                      className="w-full px-4 py-3 border border-[#D0A2F3]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora"
+                      className={`w-full px-4 py-3 border ${
+                        errors.titulo && touched.titulo ? 'border-red-400' : 'border-[#D0A2F3]/30'
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
                       placeholder={t('form.placeholders.emailTitle')}
                     />
+                    <AnimatePresence>
+                      {errors.titulo && touched.titulo && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="text-red-500 text-xs mt-1 ml-1 font-lora font-medium"
+                        >
+                          {errors.titulo}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
 
                   <div>
@@ -223,10 +335,25 @@ const Form = () => {
                       name="asunto"
                       value={formData.asunto}
                       onChange={handleInputChange}
+                      onBlur={handleBlur}
                       required
-                      className="w-full px-4 py-3 border border-[#D0A2F3]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora"
+                      className={`w-full px-4 py-3 border ${
+                        errors.asunto && touched.asunto ? 'border-red-400' : 'border-[#D0A2F3]/30'
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
                       placeholder={t('form.placeholders.subject')}
                     />
+                    <AnimatePresence>
+                      {errors.asunto && touched.asunto && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="text-red-500 text-xs mt-1 ml-1 font-lora font-medium"
+                        >
+                          {errors.asunto}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
 
                   <div>
@@ -239,11 +366,26 @@ const Form = () => {
                       name="cuerpo"
                       value={formData.cuerpo}
                       onChange={handleInputChange}
+                      onBlur={handleBlur}
                       required
                       rows={6}
-                      className="w-full px-4 py-3 border border-[#D0A2F3]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora resize-none"
+                      className={`w-full px-4 py-3 border ${
+                        errors.cuerpo && touched.cuerpo ? 'border-red-400' : 'border-[#D0A2F3]/30'
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora resize-none`}
                       placeholder={t('form.placeholders.message')}
                     />
+                    <AnimatePresence>
+                      {errors.cuerpo && touched.cuerpo && (
+                        <motion.p
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className="text-red-500 text-xs mt-1 ml-1 font-lora font-medium"
+                        >
+                          {errors.cuerpo}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
 
@@ -323,6 +465,46 @@ const Form = () => {
 
 
       </div>
+
+      {/* Modal de Feedback */}
+      <AnimatePresence>
+        {modalStatus.isOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl text-center border border-[#D0A2F3]/20"
+            >
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 ${
+                modalStatus.type === 'success' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
+              }`}>
+                {modalStatus.type === 'success' ? (
+                  <CheckCircle className="w-10 h-10" />
+                ) : (
+                  <X className="w-10 h-10" />
+                )}
+              </div>
+              
+              <h3 className="text-2xl font-bold font-playfair text-[#6A5A87] mb-3">
+                {modalStatus.type === 'success' ? t('form.successTitle') : t('form.errorTitle')}
+              </h3>
+              
+              <p className="text-[#6A5A87] font-lora mb-8">
+                {modalStatus.type === 'success' ? t('form.successMessage') : t('form.errorMessage')}
+              </p>
+              
+              <button
+                type="button"
+                onClick={() => setModalStatus({ ...modalStatus, isOpen: false })}
+                className="w-full py-4 bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] hover:from-[#C08BEF] hover:to-[#9152C9] text-white font-semibold rounded-xl shadow-lg transition-all duration-300 font-lora"
+              >
+                {t('form.close')}
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -119,8 +119,11 @@
     "filesSelected": "Selected files",
     "submit": "Send Message",
     "sending": "Sending...",
+    "successTitle": "Message Sent!",
+    "errorTitle": "Sending Error",
     "successMessage": "Message sent successfully! I'll contact you soon.",
     "errorMessage": "Error sending message. Please try again or contact directly by email.",
+    "close": "Close",
     "alternativeContact": "Prefer another contact method?",
     "alternativeContactText": "I will send you the quote as soon as possible.",
     "placeholders": {
@@ -130,6 +133,12 @@
       "emailTitle": "E.g: Document translation inquiry",
       "subject": "Brief description of the subject",
       "message": "Describe your translation project in detail..."
+    },
+    "validation": {
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email",
+      "noNumbers": "This field cannot contain numbers",
+      "tooShort": "The message is too short"
     }
   },
   "footer": {
