@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
@@ -15,6 +15,12 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Configurar Resend
+if (!process.env.RESEND_API_KEY) {
+  console.warn('⚠️ ADVERTENCIA: RESEND_API_KEY no está definida en el archivo .env');
+}
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Middleware
 const allowedOrigins = [
@@ -74,36 +80,12 @@ const upload = multer({
   }
 });
 
-// Configuración del transporter de Nodemailer
-const createTransporter = () => {
-  // Solo necesitas credenciales SMTP para ENVIAR emails, no para recibirlos
-  // El email del usuario viene del formulario y se usa en replyTo
-  console.log('🔍 Verificando credenciales SMTP...');
-  console.log('EMAIL_USER:', process.env.EMAIL_USER ? '✅ Configurado' : '❌ No configurado');
-  console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '✅ Configurado' : '❌ No configurado');
-  
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.log('⚠️  No hay credenciales SMTP configuradas.');
-    console.log('⚠️  Para enviar emails reales, configura EMAIL_USER y EMAIL_PASS en .env');
-    return null; // Retornar null para manejar el error
-  }
-
-  return nodemailer.createTransport({
-    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-    port: process.env.EMAIL_PORT || 587,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-  });
-};
-
 // Ruta principal
 app.get('/', (req, res) => {
   res.json({ 
-    message: 'Backend del Portfolio de Traducción funcionando correctamente',
-    status: 'OK'
+    message: 'Backend del Portfolio de Traducción funcionando con Resend',
+    status: 'OK',
+    service: 'Resend'
   });
 });
 
@@ -130,78 +112,83 @@ app.post('/api/send-email', upload.array('files', 5), async (req, res) => {
       });
     }
 
-    // Crear el transporter
-    const transporter = createTransporter();
+    const emailTo = process.env.EMAIL_TO || 'melina.lujan.pereyra@gmail.com';
     
-    if (!transporter) {
+    // Preparar contenido HTML usando tus estilos originales
+    const htmlContent = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #D0A2F3, #C08BEF); padding: 20px; border-radius: 10px 10px 0 0;">
+          <h2 style="color: white; margin: 0; text-align: center;">Nuevo mensaje del Portfolio</h2>
+        </div>
+        
+        <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e9ecef;">
+          <h3 style="color: #6A5A87; margin-top: 0;">Información del cliente:</h3>
+          <p><strong>Nombre:</strong> ${nombre} ${apellido}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Título del mensaje:</strong> ${titulo}</p>
+          
+          <h3 style="color: #6A5A87;">Asunto:</h3>
+          <p style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #D0A2F3;">${asunto}</p>
+          
+          <h3 style="color: #6A5A87;">Mensaje:</h3>
+          <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #D0A2F3; white-space: pre-wrap;">${cuerpo}</div>
+          
+          ${files.length > 0 ? `
+            <h3 style="color: #6A5A87;">Archivos adjuntos (${files.length}):</h3>
+            <ul style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #D0A2F3;">
+              ${files.map(file => `<li>${file.originalname} (${(file.size / 1024).toFixed(2)} KB)</li>`).join('')}
+            </ul>
+          ` : ''}
+          
+          <hr style="border: none; border-top: 2px solid #D0A2F3; margin: 20px 0;">
+          <p style="color: #6A5A87; font-size: 14px; text-align: center;">
+            Este mensaje fue enviado desde el formulario de contacto del portfolio.
+          </p>
+        </div>
+      </div>
+    `;
+
+    // Preparar adjuntos para Resend
+    const attachments = files.map(file => ({
+      filename: file.originalname,
+      content: file.buffer
+    }));
+
+    console.log('📧 Enviando email con Resend...');
+
+    const { data, error } = await resend.emails.send({
+      from: 'Portfolio Contact <onboarding@resend.dev>', // Debes verificar un dominio en producción
+      to: [emailTo],
+      replyTo: email,
+      subject: `[Portfolio] ${titulo} - ${nombre} ${apellido}`,
+      html: htmlContent,
+      attachments: attachments
+    });
+
+    if (error) {
+      console.error('❌ Error de Resend:', error);
       return res.status(500).json({
         success: false,
-        message: 'Servicio de email no configurado. Por favor contacta al administrador.'
+        message: 'Error al enviar el email con Resend',
+        error: error.message
       });
     }
 
-    // Configurar el email
-    const mailOptions = {
-      from: process.env.EMAIL_FROM || 'contacto@portfolio.com',
-      to: process.env.EMAIL_TO || 'melina.lujan.pereyra@gmail.com',
-      replyTo: email, // Email del usuario para responder (quien llenó el formulario)
-      subject: `[Portfolio] ${titulo} - ${nombre} ${apellido}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background: linear-gradient(135deg, #D0A2F3, #C08BEF); padding: 20px; border-radius: 10px 10px 0 0;">
-            <h2 style="color: white; margin: 0; text-align: center;">Nuevo mensaje del Portfolio</h2>
-          </div>
-          
-          <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e9ecef;">
-            <h3 style="color: #6A5A87; margin-top: 0;">Información del cliente:</h3>
-            <p><strong>Nombre:</strong> ${nombre} ${apellido}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Título del mensaje:</strong> ${titulo}</p>
-            
-            <h3 style="color: #6A5A87;">Asunto:</h3>
-            <p style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #D0A2F3;">${asunto}</p>
-            
-            <h3 style="color: #6A5A87;">Mensaje:</h3>
-            <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #D0A2F3; white-space: pre-wrap;">${cuerpo}</div>
-            
-            ${files.length > 0 ? `
-              <h3 style="color: #6A5A87;">Archivos adjuntos (${files.length}):</h3>
-              <ul style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #D0A2F3;">
-                ${files.map(file => `<li>${file.originalname} (${(file.size / 1024).toFixed(2)} KB)</li>`).join('')}
-              </ul>
-            ` : ''}
-            
-            <hr style="border: none; border-top: 2px solid #D0A2F3; margin: 20px 0;">
-            <p style="color: #6A5A87; font-size: 14px; text-align: center;">
-              Este mensaje fue enviado desde el formulario de contacto del portfolio.
-            </p>
-          </div>
-        </div>
-      `,
-      attachments: files.map(file => ({
-        filename: file.originalname,
-        content: file.buffer,
-        contentType: file.mimetype
-      }))
-    };
-
-    // Enviar el email
-    const info = await transporter.sendMail(mailOptions);
-    
-    console.log('Email enviado exitosamente:', info.messageId);
+    console.log('✅ Email enviado exitosamente con Resend. ID:', data.id);
     
     res.json({
       success: true,
       message: 'Mensaje enviado correctamente',
-      messageId: info.messageId
+      service: 'Resend',
+      messageId: data.id
     });
 
   } catch (error) {
-    console.error('Error al enviar email:', error);
+    console.error('❌ Error general al enviar email:', error);
     
     res.status(500).json({
       success: false,
-      message: 'Error interno del servidor',
+      message: 'Error interno al procesar el mensaje',
       error: process.env.NODE_ENV === 'development' ? error.message : 'Error interno'
     });
   }
@@ -236,9 +223,11 @@ app.use((error, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`🚀 Servidor backend corriendo en puerto ${PORT}`);
   console.log(`📧 Email configurado para: ${process.env.EMAIL_TO || 'melina.lujan.pereyra@gmail.com'}`);
-  console.log(`📁 Ruta del .env: ${path.join(__dirname, '.env')}`);
-      console.log(`🔑 EMAIL_USER existe: ${!!process.env.EMAIL_USER}`);
-    console.log(`🔑 EMAIL_PASS existe: ${!!process.env.EMAIL_PASS}`);
+  console.log(`🔑 Servicio activo: Resend`);
+  
+  if (!process.env.RESEND_API_KEY) {
+    console.log('⚠️  ALERTA CRÍTICA: Configure su RESEND_API_KEY en .env');
+  }
 });
 
 export default app;

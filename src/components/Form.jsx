@@ -303,23 +303,7 @@ const Form = () => {
           </Card>
         </motion.div>
 
-        {/* Información adicional */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center"
-        >
-          <div className="bg-white/50 backdrop-blur-sm rounded-xl p-6 border border-[#D0A2F3]/20">
-            <h3 className="text-xl font-bold text-[#6A5A87] font-lora mb-3">
-              {t('form.alternativeContact')}
-            </h3>
-            <p className="text-[#6A5A87] font-lora">
-              {t('form.alternativeContactText')}
-            </p>
-          </div>
-        </motion.div>
+
       </div>
     </section>
   );

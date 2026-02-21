@@ -6,25 +6,32 @@
     "contact": "Contact"
   },
   "hero": {
-    "subtitle": "Certified Public Translator ES<>EN",
+    "subtitle": "Sworn Translator ES (LatAm) <> EN",
     "description": "Connecting cultures and languages with accurate, professional translations tailored to your needs.",
     "certified": "Certified",
-    "years": "2+ Years",
+    "years": "4 Years",
     "languages": "ES ↔ EN",
     "global": "Global",
     "viewPortfolio": "View Portfolio",
     "contact": "Contact Me"
   },
   "about": {
-    "title": "About Me",
-    "description": "I am a certified public translator with solid academic training and professional experience. My passion for languages and precision drives me to offer high-quality translation services."
+    "title": "About me",
+    "description": "Hello! I am Melina, a certified EN<>ES translator who graduated from the Universidad del Salvador and is a member of the Colegio de Traductores Públicos de la Ciudad de Buenos Aires (CTPCBA).\n\nI am a proactive, creative and detail-oriented professional, with a special focus on grammatical, syntactical and stylistic accuracy. I have solid training in legal translation and formal documentation, which allows me to work with a high degree of precision and conceptual accuracy in legal texts.\n\nI provide legally valid, certified, and accurate translation services, ensuring that every linguistic and formal aspect of this type of document is taken care of. I work with responsibility, confidentiality and commitment to deadlines, offering clear, natural translations that are faithful to the original meaning and aligned with the standards required by law firms and companies.",
+    "passionsTitle": "My Passions",
+    "passions": {
+      "literature": "Literature",
+      "cultures": "Cultures",
+      "precision": "Precision",
+      "communication": "Communication"
+    }
   },
   "services": {
     "title": "Fields & Services",
     "subtitle": "Professional translation solutions tailored to your needs",
     "translation": {
       "title": "Translation",
-      "services": ["Legal", "Technical and scientific", "Tourism and travel"]
+      "services": ["Legal", "Education", "Tourism", "General texts"]
     },
     "audiovisual": {
       "title": "Audiovisual Translation",
@@ -32,7 +39,7 @@
     },
     "localization": {
       "title": "Localization",
-      "services": ["Video games", "Websites", "Applications"]
+      "services": ["Video games", "Websites", "Web comics"]
     },
     "editing": {
       "title": "Editing and Proofreading",
@@ -46,7 +53,7 @@
     },
     "howIWork": {
       "title": "How do I work?",
-      "subtitle": "This process applies to text translation projects or websites, translation reviews and proofreading, and transcreations. Interpretation projects work differently.",
+      "subtitle": "This process applies to all services.",
       "steps": {
         "1": {
           "title": "You contact me",
@@ -58,7 +65,7 @@
         },
         "3": {
           "title": "You receive the quote",
-          "description": "Within 24 hours I will send you the quote and delivery date."
+          "description": "I will send you the quote as soon as possible."
         },
         "4": {
           "title": "I get to work",
@@ -79,19 +86,19 @@
     "title": "Frequently Asked Questions",
     "q1": {
       "question": "How long does it take to translate a text?",
-      "answer": "Translation time depends on several factors such as text length, content complexity, and translation type. For standard texts, I estimate approximately 2,000-2,500 words per business day. For sworn translations or specialized technical texts, the time may be longer. I will always provide you with an estimated delivery date when you send me the project."
+      "answer": "The translation time depends on several factors, such as the length of the text, the complexity of the content, and the type of translation. The estimated delivery date is calculated when you send me the project."
     },
     "q2": {
       "question": "What file format should I send for translation?",
       "answer": "I accept files in multiple formats: Word (.docx, .doc), PDF, PowerPoint (.pptx), Excel (.xlsx), and plain text files (.txt). I also work with subtitle files (.srt, .vtt) and localization formats. If you have a specific format I didn't mention, consult me and I'll see if I can work with it. The important thing is that you send me the most editable file possible to ensure the best quality."
     },
     "q3": {
-      "question": "What are sworn translations?",
-      "answer": "Sworn translations are official translations that have legal and administrative validity. They are certified by a public translator (like me) and bear my seal, signature, and registration number. These translations are required for official documents such as university degrees, birth certificates, legal documents, contracts, etc. that need to be presented to official agencies, universities, or for immigration procedures."
+      "question": "What is a certified translation?",
+      "answer": "Certified translations are legally valid translations performed by registered certified translators. They bear the signature and stamp of the professional and may require legalisation by the CTPCBA to certify the authenticity of that signature.\nThey are used to submit documents to public or private bodies, universities and administrative or judicial authorities, both in the country and abroad."
     },
     "q4": {
-      "question": "Can I see some of your translations?",
-      "answer": "For confidentiality reasons and non-disclosure agreements with my clients, I cannot share complete translations of previous projects. However, I can provide you with translation samples of public texts or create a specific sample of the type of content you need translated. I can also share testimonials from satisfied clients who attest to the quality of my work."
+      "question": "What is legalisation?",
+      "answer": "Legalisation is the process by which the CTPCBA officially certifies that the signature and stamp appearing on a certified translation correspond to a registered certified translator and that the document was submitted in accordance with the formalities required by its regulations. This provides legal certainty to the translation before public or private bodies, but does not imply any judgement on the content of the text; it only certifies the authenticity of the signature and formal compliance."
     },
     "moreQuestions": "Have more questions?",
     "moreQuestionsText": "Don't hesitate to contact me to resolve any doubts about your translation projects",
@@ -115,7 +122,7 @@
     "successMessage": "Message sent successfully! I'll contact you soon.",
     "errorMessage": "Error sending message. Please try again or contact directly by email.",
     "alternativeContact": "Prefer another contact method?",
-    "alternativeContactText": "You can also contact me directly by email or social media. I'll respond within 24 hours.",
+    "alternativeContactText": "I will send you the quote as soon as possible.",
     "placeholders": {
       "firstName": "Your first name",
       "lastName": "Your last name",
@@ -126,6 +133,7 @@
     }
   },
   "footer": {
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "developedBy": "Developed by:"
   }
 }

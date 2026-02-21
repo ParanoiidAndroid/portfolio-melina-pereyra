@@ -143,51 +143,53 @@ const Services = () => {
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           viewport={{ once: true }}
-          className="mt-20"
+          className="mt-20 py-10"
         >
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-tight font-playfair mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-extrabold bg-gradient-to-r from-[#D0A2F3] to-[#C08BEF] bg-clip-text text-transparent leading-tight font-playfair mb-6">
               {t('services.catTools.title')}
             </h2>
-            <p className="text-lg text-[#6A5A87] font-lora max-w-3xl mx-auto">
+            <p className="text-lg text-[#6A5A87] font-lora max-w-3xl mx-auto leading-relaxed">
               {t('services.catTools.subtitle')}
             </p>
           </div>
 
-          {/* Herramientas CAT estáticas */}
-          <div className="flex justify-center items-center">
-            <div className="flex flex-wrap justify-center items-center gap-12 max-w-5xl">
+          {/* Herramientas CAT Premium Grid */}
+          <div className="flex justify-center">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-6xl w-full px-4">
               {[
                 { name: "Trados", image: "/assets/CATTools-trados.png" },
                 { name: "MemoQ", image: "/assets/CATTools-memoQ.png" },
                 { name: "Wordfast", image: "/assets/CATTools-wordfast.png" },
-                { name: "Aegisub", image: "/assets/CATTools-aegisub.png" },
+                { name: "Subtitle Edit", image: "/assets/CATTools-subtitleedit.png" },
                 { name: "CaptionHub", image: "/assets/CATTools-captionhub.png" }
               ].map((tool, index) => (
                 <motion.div
                   key={tool.name}
                   initial={{ y: 30, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="flex flex-col items-center space-y-3 group cursor-pointer"
+                  whileHover={{ y: -10, scale: 1.05 }}
+                  className="group relative flex flex-col items-center"
                 >
-                  <div className="relative">
-                    {/* Contenedor del logo con efectos */}
-                    <div className="w-32 h-20 flex items-center justify-center bg-white rounded-lg shadow-md group-hover:shadow-lg transition-all duration-300 border border-gray-100 group-hover:border-[#D0A2F3]/30 p-4">
-                      <img
-                        src={tool.image}
-                        alt={tool.name}
-                        className="max-w-full max-h-full object-contain filter group-hover:brightness-110 group-hover:contrast-110 transition-all duration-300"
-                      />
-                    </div>
-                    {/* Efecto de resplandor sutil */}
-                    <div className="absolute inset-0 w-32 h-20 bg-gradient-to-r from-[#D0A2F3]/10 to-[#C08BEF]/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                  {/* Glassmorphism Card */}
+                  <div className="relative w-full aspect-square flex items-center justify-center p-6 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-lg group-hover:shadow-2xl group-hover:bg-white/60 transition-all duration-500 overflow-hidden">
+                    
+                    {/* Background Gradient Blob */}
+                    <div className="absolute -top-10 -right-10 w-20 h-20 bg-[#D0A2F3]/20 rounded-full blur-xl group-hover:bg-[#D0A2F3]/40 transition-all duration-500"></div>
+                    <div className="absolute -bottom-10 -left-10 w-20 h-20 bg-[#C08BEF]/20 rounded-full blur-xl group-hover:bg-[#C08BEF]/40 transition-all duration-500"></div>
+
+                    {/* Tool Image */}
+                    <img
+                      src={tool.image}
+                      alt={tool.name}
+                      className="relative z-10 w-full h-full object-contain filter drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300 transform group-hover:scale-110"
+                    />
                   </div>
-                  
-                  {/* Nombre de la herramienta */}
-                  <span className="text-sm font-medium text-[#6A5A87] font-lora group-hover:text-[#9152C9] transition-colors duration-300 text-center">
+
+                  {/* Label */}
+                  <span className="mt-4 text-base font-semibold text-[#6A5A87] font-lora group-hover:text-[#9152C9] transition-colors duration-300">
                     {tool.name}
                   </span>
                 </motion.div>

@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, MapPin, Phone, Globe, Heart } from 'lucide-react';
+import { Mail, Linkedin, MapPin, Phone, Globe, Heart, Github } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const scrollToSection = (sectionId) => {
@@ -87,18 +89,6 @@ const Footer = () => {
                 >
                   <Linkedin className="w-5 h-5" />
                 </motion.a>
-                
-                <motion.a
-                  href="https://melinapereyra.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-all duration-300"
-                  aria-label="Sitio web"
-                >
-                  <Globe className="w-5 h-5" />
-                </motion.a>
               </motion.div>
             </div>
 
@@ -143,16 +133,11 @@ const Footer = () => {
                 <div className="flex items-center space-x-3 text-sm opacity-90">
                   <Mail className="w-4 h-4 flex-shrink-0" />
                   <a 
-                    href="mailto:melina.pereyra@email.com"
+                    href="mailto:melina.lujan.pereyra@gmail.com"
                     className="hover:text-white transition-colors duration-300 font-lora"
                   >
-                    melina.pereyra@email.com
+                    melina.lujan.pereyra@gmail.com
                   </a>
-                </div>
-                
-                <div className="flex items-center space-x-3 text-sm opacity-90">
-                  <Phone className="w-4 h-4 flex-shrink-0" />
-                  <span className="font-lora">+54 9 11 1234-5678</span>
                 </div>
                 
                 <div className="flex items-start space-x-3 text-sm opacity-90">
@@ -175,7 +160,7 @@ const Footer = () => {
                 viewport={{ once: true }}
                 className="text-sm opacity-80 font-lora text-center md:text-left"
               >
-                © {currentYear} Melina Pereyra. Todos los derechos reservados.
+                © {currentYear} Melina Pereyra. {t('footer.rights')}
               </motion.p>
               
               <motion.div
@@ -183,11 +168,29 @@ const Footer = () => {
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="flex items-center space-x-2 text-sm opacity-80 font-lora"
+                className="flex items-center space-x-4 text-sm opacity-80 font-lora"
               >
-                <span>Hecho con</span>
-                <Heart className="w-4 h-4 text-red-400 fill-current" />
-                <span>en Argentina</span>
+                <span>{t('footer.developedBy')}</span>
+                <div className="flex space-x-3">
+                  <a
+                    href="https://github.com/ParanoiidAndroid"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors duration-300"
+                    aria-label="GitHub Developer"
+                  >
+                    <Github className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/martinfdez-dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white transition-colors duration-300"
+                    aria-label="LinkedIn Developer"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                </div>
               </motion.div>
             </div>
           </div>
