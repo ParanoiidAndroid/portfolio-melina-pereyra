@@ -12,7 +12,6 @@ const Form = () => {
     nombre: '',
     apellido: '',
     email: '',
-    titulo: '',
     asunto: '',
     cuerpo: ''
   });
@@ -44,8 +43,8 @@ const Form = () => {
       ...prev,
       [name]: value
     }));
-    
-    // Validar en tiempo real si ya fue tocado
+
+    // Validar en tiempo real si ya fue tocaddo
     if (touched[name]) {
       setErrors(prev => ({
         ...prev,
@@ -75,7 +74,7 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validar todos los campos antes de enviar
     const newErrors = {};
     let hasErrors = false;
@@ -94,36 +93,35 @@ const Form = () => {
     }
 
     setIsSubmitting(true);
-    
+
     try {
       // Crear FormData para enviar archivos
       const formDataToSend = new FormData();
-      
+
       // Agregar datos del formulario
       formDataToSend.append('nombre', formData.nombre);
       formDataToSend.append('apellido', formData.apellido);
       formDataToSend.append('email', formData.email);
-      formDataToSend.append('titulo', formData.titulo);
       formDataToSend.append('asunto', formData.asunto);
       formDataToSend.append('cuerpo', formData.cuerpo);
-      
+
       // Agregar datos de seguridad
       formDataToSend.append('hp_field', honeypot);
       formDataToSend.append('submission_speed', Date.now() - mountTime);
-      
+
       // Agregar archivos
       files.forEach((file) => {
         formDataToSend.append('files', file);
       });
-      
+
       // Enviar al backend
       const response = await fetch(API_ENDPOINTS.SEND_EMAIL, {
         method: 'POST',
         body: formDataToSend,
       });
-      
+
       const result = await response.json();
-      
+
       if (result.success) {
         setModalStatus({ isOpen: true, type: 'success', message: t('form.successMessage') });
         // Resetear formulario
@@ -131,7 +129,6 @@ const Form = () => {
           nombre: '',
           apellido: '',
           email: '',
-          titulo: '',
           asunto: '',
           cuerpo: ''
         });
@@ -139,13 +136,13 @@ const Form = () => {
       } else {
         throw new Error(result.message || 'Error al enviar el mensaje');
       }
-      
+
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
-      setModalStatus({ 
-        isOpen: true, 
-        type: 'error', 
-        message: error.message || t('form.errorMessage') 
+      setModalStatus({
+        isOpen: true,
+        type: 'error',
+        message: error.message || t('form.errorMessage')
       });
     } finally {
       setIsSubmitting(false);
@@ -208,10 +205,8 @@ const Form = () => {
                       value={formData.nombre}
                       onChange={handleInputChange}
                       onBlur={handleBlur}
-                      required
-                      className={`w-full px-4 py-3 border ${
-                        errors.nombre && touched.nombre ? 'border-red-400' : 'border-[#D0A2F3]/30'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
+                      className={`w-full px-4 py-3 border ${errors.nombre && touched.nombre ? 'border-red-400' : 'border-[#D0A2F3]/30'
+                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
                       placeholder={t('form.placeholders.firstName')}
                     />
                     <AnimatePresence>
@@ -227,7 +222,7 @@ const Form = () => {
                       )}
                     </AnimatePresence>
                   </div>
-                  
+
                   <div>
                     <label htmlFor="apellido" className="block text-sm font-semibold text-[#6A5A87] font-lora mb-2">
                       <User className="w-4 h-4 inline mr-2" />
@@ -240,10 +235,8 @@ const Form = () => {
                       value={formData.apellido}
                       onChange={handleInputChange}
                       onBlur={handleBlur}
-                      required
-                      className={`w-full px-4 py-3 border ${
-                        errors.apellido && touched.apellido ? 'border-red-400' : 'border-[#D0A2F3]/30'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
+                      className={`w-full px-4 py-3 border ${errors.apellido && touched.apellido ? 'border-red-400' : 'border-[#D0A2F3]/30'
+                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
                       placeholder={t('form.placeholders.lastName')}
                     />
                     <AnimatePresence>
@@ -274,10 +267,8 @@ const Form = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     onBlur={handleBlur}
-                    required
-                    className={`w-full px-4 py-3 border ${
-                      errors.email && touched.email ? 'border-red-400' : 'border-[#D0A2F3]/30'
-                    } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
+                    className={`w-full px-4 py-3 border ${errors.email && touched.email ? 'border-red-400' : 'border-[#D0A2F3]/30'
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
                     placeholder={t('form.placeholders.email')}
                   />
                   <AnimatePresence>
@@ -297,38 +288,6 @@ const Form = () => {
                 {/* Contenido del mensaje */}
                 <div className="space-y-6">
                   <div>
-                    <label htmlFor="titulo" className="block text-sm font-semibold text-[#6A5A87] font-lora mb-2">
-                      <Mail className="w-4 h-4 inline mr-2" />
-                      {t('form.emailTitle')} *
-                    </label>
-                    <input
-                      type="text"
-                      id="titulo"
-                      name="titulo"
-                      value={formData.titulo}
-                      onChange={handleInputChange}
-                      onBlur={handleBlur}
-                      required
-                      className={`w-full px-4 py-3 border ${
-                        errors.titulo && touched.titulo ? 'border-red-400' : 'border-[#D0A2F3]/30'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
-                      placeholder={t('form.placeholders.emailTitle')}
-                    />
-                    <AnimatePresence>
-                      {errors.titulo && touched.titulo && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          className="text-red-500 text-xs mt-1 ml-1 font-lora font-medium"
-                        >
-                          {errors.titulo}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  <div>
                     <label htmlFor="asunto" className="block text-sm font-semibold text-[#6A5A87] font-lora mb-2">
                       <FileText className="w-4 h-4 inline mr-2" />
                       {t('form.subject')} *
@@ -340,10 +299,8 @@ const Form = () => {
                       value={formData.asunto}
                       onChange={handleInputChange}
                       onBlur={handleBlur}
-                      required
-                      className={`w-full px-4 py-3 border ${
-                        errors.asunto && touched.asunto ? 'border-red-400' : 'border-[#D0A2F3]/30'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
+                      className={`w-full px-4 py-3 border ${errors.asunto && touched.asunto ? 'border-red-400' : 'border-[#D0A2F3]/30'
+                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora`}
                       placeholder={t('form.placeholders.subject')}
                     />
                     <AnimatePresence>
@@ -371,11 +328,9 @@ const Form = () => {
                       value={formData.cuerpo}
                       onChange={handleInputChange}
                       onBlur={handleBlur}
-                      required
                       rows={6}
-                      className={`w-full px-4 py-3 border ${
-                        errors.cuerpo && touched.cuerpo ? 'border-red-400' : 'border-[#D0A2F3]/30'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora resize-none`}
+                      className={`w-full px-4 py-3 border ${errors.cuerpo && touched.cuerpo ? 'border-red-400' : 'border-[#D0A2F3]/30'
+                        } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D0A2F3] focus:border-transparent transition-all duration-300 font-lora resize-none`}
                       placeholder={t('form.placeholders.message')}
                     />
                     <AnimatePresence>
@@ -480,24 +435,23 @@ const Form = () => {
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl text-center border border-[#D0A2F3]/20"
             >
-              <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 ${
-                modalStatus.type === 'success' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
-              }`}>
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 ${modalStatus.type === 'success' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
+                }`}>
                 {modalStatus.type === 'success' ? (
                   <CheckCircle className="w-10 h-10" />
                 ) : (
                   <X className="w-10 h-10" />
                 )}
               </div>
-              
+
               <h3 className="text-2xl font-bold font-playfair text-[#6A5A87] mb-3">
                 {modalStatus.type === 'success' ? t('form.successTitle') : t('form.errorTitle')}
               </h3>
-              
+
               <p className="text-[#6A5A87] font-lora mb-8">
                 {modalStatus.message}
               </p>
-              
+
               <button
                 type="button"
                 onClick={() => setModalStatus({ ...modalStatus, isOpen: false })}

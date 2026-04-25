@@ -1,4 +1,5 @@
 {
+  "logo": "/assets/logo1-mp.png",
   "nav": {
     "about": "Sobre Mí",
     "services": "Servicios",
@@ -12,7 +13,8 @@
     "years": "4 Años",
     "languages": "ES ↔ EN",
     "global": "Global",
-    "viewPortfolio": "Ver Portfolio",
+    "downloadCV": "Descargar CV",
+    "cvFilename": "EN-ES_TRADUCTORA_PEREYRA_MELINA.pdf",
     "contact": "Contáctame"
   },
   "about": {
@@ -106,11 +108,11 @@
   },
   "form": {
     "title": "Contáctame",
+    "pageTitle": "Melina Pereyra Servicios Lingüísticos",
     "subtitle": "¿Tenés un proyecto de traducción? Completa el formulario y me pondré en contacto con vos lo antes posible.",
     "firstName": "Nombre",
     "lastName": "Apellido",
     "email": "Email",
-    "emailTitle": "Título del Email",
     "subject": "Asunto",
     "message": "Mensaje",
     "files": "Archivos adjuntos (opcional, máximo 5)",
@@ -130,7 +132,6 @@
       "firstName": "Tu nombre",
       "lastName": "Tu apellido",
       "email": "tu-email@ejemplo.com",
-      "emailTitle": "Ej: Consulta sobre traducción de documentos",
       "subject": "Breve descripción del asunto",
       "message": "Describe tu proyecto de traducción en detalle..."
     },

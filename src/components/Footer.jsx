@@ -40,7 +40,7 @@ const Footer = () => {
                 className="flex items-center space-x-4"
               >
                 <img
-                  src="/assets/logo1-mp.png"
+                  src={t('logo')}
                   alt="Melina Pereyra Logo"
                   className="h-16 w-auto"
                 />

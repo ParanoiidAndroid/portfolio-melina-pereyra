@@ -106,7 +106,7 @@ app.get('/', (req, res) => {
 // Ruta para enviar emails con protección contra bots y rate limit
 app.post('/api/send-email', emailRateLimiter, upload.array('files', 5), async (req, res) => {
   try {
-    const { nombre, apellido, email, titulo, asunto, cuerpo, hp_field, submission_speed } = req.body;
+    const { nombre, apellido, email, asunto, cuerpo, hp_field, submission_speed } = req.body;
     const files = req.files || [];
 
     // 1. Verificación de Honeypot (Si el campo oculto está lleno, es un bot)
@@ -128,7 +128,7 @@ app.post('/api/send-email', emailRateLimiter, upload.array('files', 5), async (r
     }
 
     // Validar datos requeridos
-    if (!nombre || !apellido || !email || !titulo || !asunto || !cuerpo) {
+    if (!nombre || !apellido || !email || !asunto || !cuerpo) {
       return res.status(400).json({
         success: false,
         message: 'Todos los campos son obligatorios'
@@ -157,7 +157,6 @@ app.post('/api/send-email', emailRateLimiter, upload.array('files', 5), async (r
           <h3 style="color: #6A5A87; margin-top: 0;">Información del cliente:</h3>
           <p><strong>Nombre:</strong> ${nombre} ${apellido}</p>
           <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Título del mensaje:</strong> ${titulo}</p>
           
           <h3 style="color: #6A5A87;">Asunto:</h3>
           <p style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #D0A2F3;">${asunto}</p>
@@ -192,7 +191,7 @@ app.post('/api/send-email', emailRateLimiter, upload.array('files', 5), async (r
       from: 'Portfolio Contact <onboarding@resend.dev>', 
       to: [emailTo],
       replyTo: email,
-      subject: `[Portfolio] ${titulo} - ${nombre} ${apellido}`,
+      subject: `[Portfolio] ${asunto} - ${nombre} ${apellido}`,
       html: htmlContent,
       attachments: attachments
     });

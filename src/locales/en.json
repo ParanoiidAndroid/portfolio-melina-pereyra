@@ -1,4 +1,5 @@
 {
+  "logo": "/assets/logo-melinapereyra-english.png",
   "nav": {
     "about": "About Me",
     "services": "Services",
@@ -12,7 +13,8 @@
     "years": "4 Years",
     "languages": "ES ↔ EN",
     "global": "Global",
-    "viewPortfolio": "View Portfolio",
+    "downloadCV": "Download Resume",
+    "cvFilename": "EN-ES_TRANSLATOR_PEREYRA_MELINA.pdf",
     "contact": "Contact Me"
   },
   "about": {
@@ -106,11 +108,11 @@
   },
   "form": {
     "title": "Contact Me",
+    "pageTitle": "Melina Pereyra Linguistic Services",
     "subtitle": "Have a translation project? Fill out the form and I'll get in touch with you as soon as possible.",
     "firstName": "First Name",
     "lastName": "Last Name",
     "email": "Email",
-    "emailTitle": "Email Title",
     "subject": "Subject",
     "message": "Message",
     "files": "Attachments (optional, maximum 5)",
@@ -130,7 +132,6 @@
       "firstName": "Your first name",
       "lastName": "Your last name",
       "email": "your-email@example.com",
-      "emailTitle": "E.g: Document translation inquiry",
       "subject": "Brief description of the subject",
       "message": "Describe your translation project in detail..."
     },
@@ -143,7 +144,7 @@
   },
   "footer": {
     "name": "Melina Pereyra",
-    "profession": "Certified Translator ES↔EN",
+    "profession": "Sworn Translator ES (LatAm) <> EN",
     "description": "Connecting cultures and languages with accurate, professional, and tailored translations for your needs.",
     "quickLinks": "Quick Links",
     "contact": "Contact",

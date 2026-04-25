@@ -170,30 +170,39 @@ const Services = () => {
               ].map((tool, index) => (
                 <motion.div
                   key={tool.name}
-                  initial={{ y: 30, opacity: 0 }}
+                  initial={{ y: 50, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 12,
+                    delay: index * 0.1 
+                  }}
                   viewport={{ once: true }}
-                  whileHover={{ y: -10, scale: 1.05 }}
+                  whileHover={{ 
+                    y: -12, 
+                    scale: 1.05,
+                    transition: { duration: 0.3 }
+                  }}
                   className="group relative flex flex-col items-center"
                 >
                   {/* Glassmorphism Card */}
-                  <div className="relative w-full aspect-square flex items-center justify-center p-6 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-lg group-hover:shadow-2xl group-hover:bg-white/60 transition-all duration-500 overflow-hidden">
+                  <div className="relative w-full aspect-square flex items-center justify-center p-6 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 shadow-lg group-hover:shadow-[0_20px_50px_rgba(208,162,243,0.3)] group-hover:bg-white/70 transition-all duration-500 overflow-hidden">
                     
-                    {/* Background Gradient Blob */}
-                    <div className="absolute -top-10 -right-10 w-20 h-20 bg-[#D0A2F3]/20 rounded-full blur-xl group-hover:bg-[#D0A2F3]/40 transition-all duration-500"></div>
-                    <div className="absolute -bottom-10 -left-10 w-20 h-20 bg-[#C08BEF]/20 rounded-full blur-xl group-hover:bg-[#C08BEF]/40 transition-all duration-500"></div>
+                    {/* Background Gradient Blob - More intense on hover */}
+                    <div className="absolute -top-10 -right-10 w-20 h-20 bg-[#D0A2F3]/20 rounded-full blur-xl group-hover:bg-[#D0A2F3]/50 group-hover:scale-150 transition-all duration-500"></div>
+                    <div className="absolute -bottom-10 -left-10 w-20 h-20 bg-[#C08BEF]/20 rounded-full blur-xl group-hover:bg-[#C08BEF]/50 group-hover:scale-150 transition-all duration-500"></div>
 
                     {/* Tool Image */}
                     <img
                       src={tool.image}
                       alt={tool.name}
-                      className="relative z-10 w-full h-full object-contain filter drop-shadow-sm group-hover:drop-shadow-md transition-all duration-300 transform group-hover:scale-110"
+                      className="relative z-10 w-full h-full object-contain filter drop-shadow-sm group-hover:drop-shadow-xl transition-all duration-300 transform group-hover:rotate-3"
                     />
                   </div>
 
                   {/* Label */}
-                  <span className="mt-4 text-base font-semibold text-[#6A5A87] font-lora group-hover:text-[#9152C9] transition-colors duration-300">
+                  <span className="mt-4 text-base font-bold text-[#6A5A87] font-lora group-hover:text-[#9152C9] transition-colors duration-300">
                     {tool.name}
                   </span>
                 </motion.div>

@@ -7,8 +7,19 @@ import FAQ from "./components/FAQ";
 import Form from "./components/Form";
 import Footer from "./components/Footer";
 import LanguageTransition from "./components/LanguageTransition";
+import DownloadFAB from "./components/DownloadFAB";
+
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    document.title = t('form.pageTitle');
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language, t]);
+
   return (
     <>
       <Navbar />
@@ -23,6 +34,7 @@ function App() {
         </main>
       </LanguageTransition>
       
+      <DownloadFAB />
       <Footer />
     </>
   );

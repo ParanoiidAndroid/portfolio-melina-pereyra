@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Mail, Star, CheckCircle, Languages, Globe } from 'lucide-react';
+import { ArrowRight, Mail, Star, CheckCircle, Languages, Globe, FileText } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -150,19 +150,19 @@ const Hero = () => {
           transition={{ duration: 1, delay: 1.0 }}
           className="flex flex-col sm:flex-row gap-4 mt-12"
         >
-          {/* Botón 1: Ver Portfolio */}
+          {/* Botón 1: Descargar CV */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button 
-              size="lg"
-              className="bg-[#D0A2F3] hover:bg-[#9152C9] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300"
-              onClick={() => scrollToSection('about')}
+            <a 
+              href={`/assets/${t('hero.cvFilename')}`}
+              download={t('hero.cvFilename')}
+              className="inline-flex items-center justify-center bg-[#D0A2F3] hover:bg-[#9152C9] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300 h-11 cursor-pointer"
             >
-              {t('hero.viewPortfolio')}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+              <FileText className="mr-2 h-4 w-4" />
+              {t('hero.downloadCV')}
+            </a>
           </motion.div>
 
           {/* Botón 2: Contáctame */}
@@ -173,7 +173,7 @@ const Hero = () => {
             <Button 
               variant="outline"
               size="lg"
-              className="bg-white hover:bg-[#EFEAEF] text-[#9152C9] hover:text-[#9152C9] border-2 border-[#D0A2F3] hover:border-[#9152C9] font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300"
+              className="bg-white hover:bg-[#EFEAEF] text-[#9152C9] hover:text-[#9152C9] border-2 border-[#D0A2F3] hover:border-[#9152C9] font-semibold px-8 py-3 rounded-lg shadow-md transition-all duration-300 cursor-pointer"
               onClick={() => scrollToSection('contact')}
             >
               <Mail className="mr-2 h-4 w-4" />
@@ -183,6 +183,29 @@ const Hero = () => {
         </motion.div>
 
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
+      >
+        <div className="w-[26px] h-[40px] border-2 border-[#D0A2F3]/40 rounded-full flex justify-center p-1.5">
+          <motion.div 
+            animate={{ 
+              y: [0, 12, 0],
+              opacity: [1, 0.5, 1]
+            }}
+            transition={{ 
+              duration: 1.5, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            className="w-1 h-2 bg-[#D0A2F3] rounded-full"
+          />
+        </div>
+      </motion.div>
     </section>
   );
 };

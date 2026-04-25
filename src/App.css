@@ -10,10 +10,14 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* Efecto adicional para el Navbar en scroll */
+/* Efecto adicional para el Navbar en scroll con Glassmorphism */
 .navbar-scrolled {
-  background-color: #c08bef; /* Cambia el color al hacer scroll */
-  transition: background-color 0.3s ease-in-out;
+  background-color: rgba(192, 139, 239, 0.85); /* Color principal con opacidad */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @theme inline {
